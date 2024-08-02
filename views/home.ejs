@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+
+<body>
+    <h1>Url Shortner</h1>
+    <% if(locals.id) {%>
+        <p>URL Generated: <b> http://localhost:8001/<%= id %></b></p>
+        <% } %>
+            <div>
+                <form method="POST" action="/url">
+                    <label>
+                        Enter Your Original URL
+                    </label>
+                    <input type="text" name="url" placeholder="https://example.com">
+                    <button type="submit">Generate </button>
+                </form>
+            </div>
+            <div>
+                <% if(locals.urls) {%>
+                    <table>
+                        <thead>
+                            <th>S. No</th>
+                            <th>Short Id</th>
+                            <th>Redirect</th>
+                            <th>Clicks</th>
+                        </thead>
+                        <tbody>
+                            <% urls.forEach((element,index)=> { %>
+                                <tr>
+                                    <td>
+                                        <%= index+1 %>
+                                    </td>
+                                    <td>
+                                        <%= element.shortId %>
+                                    </td>
+                                    <td>
+                                        <%= element.RedirectURL %>
+                                    </td>
+                                    <td>
+                                        <%= element.visitHistory.length %>
+                                    </td>
+                                    <% }) %>
+                                </tr>
+                        </tbody>
+                    </table>
+
+                    <% } %>
+            </div>
+
+</body>
+
+</html>
